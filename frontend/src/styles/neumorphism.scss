@@ -24,10 +24,15 @@
 
 button {
   @include neumorphic(6, 6, 8);
+  border: 1px dashed $border-color;
   border-radius: 8px;
   padding: 6px 12px;
 
-  &:active {
+  &:disabled {
+    box-shadow: none;
+  }
+
+  &:active:not(:disabled) {
     @include neumorphic_inset(6, 6, 8);
   }
 

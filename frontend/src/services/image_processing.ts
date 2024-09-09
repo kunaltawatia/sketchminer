@@ -16,6 +16,6 @@ export async function processImage(imageDataUrl: string) {
 	const { denoised_image, illustration_image } = response.data;
 	return {
 		denoisedImageDataUrl: denoised_image,
-		illustrationImageDataUrl: illustration_image,
+		sketchImageDataUrl: illustration_image,
 	};
 }
