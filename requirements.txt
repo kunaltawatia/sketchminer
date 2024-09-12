@@ -1,3 +1,5 @@
+annotated-types==0.7.0
+blinker==1.8.2
 click==7.1.2
 Flask==1.1.4
 Flask-Cors==5.0.0
@@ -8,5 +10,8 @@ MarkupSafe==1.1.1
 numpy==2.1.1
 opencv-python==4.10.0.84
 packaging==24.1
+pydantic==2.9.1
+pydantic_core==2.23.3
 pytz==2023.3.post1
+typing_extensions==4.12.2
 Werkzeug==1.0.1
