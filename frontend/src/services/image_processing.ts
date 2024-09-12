@@ -7,15 +7,47 @@ const client = axios.create({
 			: '/api',
 });
 
-export async function processImage(imageDataUrl: string) {
-	const response = await client.post<{
-		denoised_image: string;
-		illustration_image: string;
-	}>('/process', { image: imageDataUrl });
+interface DenoisingConfiguration {
+	h: number;
+	templateWindowSize: number;
+	searchWindowSize: number;
+}
 
-	const { denoised_image, illustration_image } = response.data;
+interface ThresholdingConfiguration {
+	blockSize: number;
+	C: number;
+}
+
+export interface ImageProcessingConfiguration {
+	denoisingConfiguration: DenoisingConfiguration;
+	thresholdingConfiguration: ThresholdingConfiguration;
+	sketchGrayscaleValue: number;
+	transparent_sketch: boolean;
+}
+
+interface ImageProcessingResponse {
+	denoised_image: string;
+	sketch_image: string;
+	configuration: ImageProcessingConfiguration;
+}
+
+export async function processImage(
+	imageDataUrl: string,
+	configuration: ImageProcessingConfiguration,
+) {
+	const response = await client.post<ImageProcessingResponse>('/process', {
+		image: imageDataUrl,
+		configuration,
+	});
+
+	const {
+		denoised_image,
+		sketch_image,
+		configuration: responseConfiguration,
+	} = response.data;
 	return {
 		denoisedImageDataUrl: denoised_image,
-		sketchImageDataUrl: illustration_image,
+		sketchImageDataUrl: sketch_image,
+		configuration: responseConfiguration,
 	};
 }

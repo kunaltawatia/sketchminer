@@ -1,1 +1,1 @@
-from .processor import process_image_data_url
+from .processor import process_image_data_url, ImageProcessingConfiguration

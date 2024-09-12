@@ -4,7 +4,7 @@ import base64
 
 
 def data_url_to_cv2_image(image_data_url: str) -> cv2.typing.MatLike:
-    header, base64_data = image_data_url.split(',', 1)
+    _, base64_data = image_data_url.split(',', 1)
 
     nparr = np.fromstring(base64.b64decode(base64_data), np.uint8)
     image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
